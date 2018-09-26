@@ -57,7 +57,7 @@
     [super windowDidLoad];
 	self.windowState = 0;
 	self.infoView.layer.cornerRadius = 10.0;
-	self.window.backgroundColor = [NSColor whiteColor];
+	self.window.backgroundColor = [NSColor windowBackgroundColor];
     [self.window setHasShadow:self.windowShouldHaveShadow];
     // Change highlight of the `visitWebsiteButton` when it's clicked. Otherwise, the button will have a highlight around it which isn't visually pleasing.
        [self.visitWebsiteButton.cell setHighlightsBy:NSContentsCellMask];
@@ -100,12 +100,18 @@
 
     }
 	
+    // get the default text color for the current UI appearance
+    NSDictionary *textColorAttribs = @{NSForegroundColorAttributeName : [NSColor textColor]};
+    
 	// Code that can potentially throw an exception
 	
 	// Set credits
 	if(!self.appCredits) {
 		@try {
-			self.appCredits = [[NSAttributedString alloc] initWithPath:[[NSBundle mainBundle] pathForResource:@"Credits" ofType:self.creditsFileExtension] documentAttributes:nil];
+            // make sure the Credits are displayed with the correct text color for the UI mode (light vs dark)
+			NSAttributedString *tempCredits = [[NSAttributedString alloc] initWithPath:[[NSBundle mainBundle] pathForResource:@"Credits" ofType:self.creditsFileExtension] documentAttributes:nil];
+            self.appCredits = [[NSMutableAttributedString alloc] initWithAttributedString:tempCredits];
+            [self.appCredits addAttributes:textColorAttribs range:NSMakeRange(0, self.appCredits.length)];
 		}
 		@catch (NSException *exception) {
 			// hide the credits button
@@ -118,8 +124,11 @@
 	// Set EULA
 	if(!self.appEULA) {
 		@try {
-			self.appEULA = [[NSAttributedString alloc] initWithPath:[[NSBundle mainBundle] pathForResource:@"EULA" ofType:self.eulaFileExtension] documentAttributes:nil];
-		}
+            // make sure the EULA is displayed with the correct text color for the UI mode (light vs dark)
+            NSAttributedString *tempEULA = [[NSAttributedString alloc] initWithPath:[[NSBundle mainBundle] pathForResource:@"EULA" ofType:self.eulaFileExtension] documentAttributes:nil];
+            self.appEULA = [[NSMutableAttributedString alloc] initWithAttributedString:tempEULA];
+            [self.appEULA addAttributes:textColorAttribs range:NSMakeRange(0, self.appEULA.length)];
+        }
 		@catch (NSException *exception) {
 			// hide the eula button
 			[self.EULAButton setHidden:YES];

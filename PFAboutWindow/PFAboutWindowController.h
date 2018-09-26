@@ -33,13 +33,13 @@
  *  The credits.
  *  Default: contents of file at [[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"rtf"];
  */
-@property (copy) NSAttributedString *appCredits;
+@property NSMutableAttributedString *appCredits;
 
 /**
  *  The EULA.
  *  Default: contents of file at [[NSBundle mainBundle] pathForResource:@"EULA" ofType:@"rtf"];
  */
-@property (copy) NSAttributedString *appEULA;
+@property NSMutableAttributedString *appEULA;
 
 /**
  *  The URL pointing to the app's website.
