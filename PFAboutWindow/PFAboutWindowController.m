@@ -153,7 +153,7 @@
 		NSRect oldFrame = [self.window frame];
 		oldFrame.size.height += amountToIncreaseHeight;
 		oldFrame.origin.y -= amountToIncreaseHeight;
-		[self.window setFrame:oldFrame display:YES animate:NSAnimationLinear];
+		[self.window setFrame:oldFrame display:YES animate:YES];
 		self.windowState = 1;
 	}
 	[self.textField.textStorage setAttributedString:self.appCredits];
@@ -165,7 +165,7 @@
 		NSRect oldFrame = [self.window frame];
 		oldFrame.size.height += amountToIncreaseHeight;
 		oldFrame.origin.y -= amountToIncreaseHeight;
-		[self.window setFrame:oldFrame display:YES animate:NSAnimationLinear];
+		[self.window setFrame:oldFrame display:YES animate:YES];
 		self.windowState = 1;
 	}
 	[self.textField.textStorage setAttributedString:self.appEULA];
@@ -177,7 +177,7 @@
 		NSRect oldFrame = [self.window frame];
 		oldFrame.size.height += amountToIncreaseHeight;
 		oldFrame.origin.y -= amountToIncreaseHeight;
-		[self.window setFrame:oldFrame display:YES animate:NSAnimationLinear];
+		[self.window setFrame:oldFrame display:YES animate:YES];
 		self.windowState = 0;
 	}
 	[self.textField.textStorage setAttributedString:self.appCopyright];
